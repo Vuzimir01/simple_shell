@@ -1,25 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 int main(void)
 {
 	char *buffer;
-	size_t bufsize = 32;
-	size_t characters;
+	size_t bufsize;
+	ssize_t characters;
+	char *dolla_dolla = "$ ";
 
-	buffer = malloc(bufsize * sizeof(char));
-	if (buffer == NULL)
-		return (EXIT_FAILURE);
-	
-	printf("$ ");
-	characters = getline(&buffer, &bufsize, stdin);
-	(void)characters;	
-	/*
-	 not sure how to compare signed size_t to -1 to check if getline fails
+	buffer = NULL;
+	bufsize = 0;
+
+	write(1, dolla_dolla, 2);
+	while ((characters = getline(&buffer, &bufsize, stdin)) != EOF)
+	{
+			write(1, buffer, characters); 
+			write(1, dolla_dolla, 2);
+	}
 	if (characters == -1)
 		return (EXIT_FAILURE);
-	*/
-	printf("%s", buffer);
-	free(buffer);
+
+	free(buffer);	
 	return (EXIT_SUCCESS);	
 }
