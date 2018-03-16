@@ -9,7 +9,6 @@ int main(void)
 	char *dolla_dolla = "$ ";
 	pid_t pid;
 	
-	(void)pid;
 	buffer = NULL;
 	length = 0;
 
@@ -17,16 +16,16 @@ int main(void)
 	while ((characters = getline(&buffer, &length, stdin)) != EOF)
 	{
 			commands = array_from_strtok(buffer);
-			execve(commands[0], commands, NULL);
-			/*
-			i = 0;
-			while (commands[i])
+			pid = fork();
+			if (pid == -1)
 			{
-				printf("%s\n", commands[i]);
-				++i;
+				perror("Error:");
+				return (1);
 			}
-			*/
-			/*write(1, buffer, characters);*/ 
+			if (pid == 0)
+				execve(commands[0], commands, NULL);
+			else
+				wait(NULL);
 			write(1, dolla_dolla, 2);
 	}
 	if (characters == -1)
