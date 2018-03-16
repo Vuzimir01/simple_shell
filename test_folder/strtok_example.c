@@ -49,7 +49,8 @@ char **array_from_strtok(char *str)
 	char **token_holder;
 	char *token;
 	unsigned int length, i;
-
+	
+	str[_strlen(str) - 1] = '\0';
 	length = find_command_length(str);
 	token_holder = malloc(sizeof(char *) * (length + 1));
 	i = 0;
@@ -61,7 +62,7 @@ char **array_from_strtok(char *str)
 		token = strtok(NULL, " ");
 		++i;
 	}
-	*(token_holder + i) = NULL;
+	token_holder[i] = NULL;
 	return (token_holder);
 }
 /*

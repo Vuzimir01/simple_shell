@@ -7,8 +7,9 @@ int main(void)
 	size_t length;
 	ssize_t characters;
 	char *dolla_dolla = "$ ";
-	int i;
-
+	pid_t pid;
+	
+	(void)pid;
 	buffer = NULL;
 	length = 0;
 
@@ -16,12 +17,15 @@ int main(void)
 	while ((characters = getline(&buffer, &length, stdin)) != EOF)
 	{
 			commands = array_from_strtok(buffer);
+			execve(commands[0], commands, NULL);
+			/*
 			i = 0;
-			while (commands[i] != '\0')
+			while (commands[i])
 			{
-				printf("%s ", commands[i]);
+				printf("%s\n", commands[i]);
 				++i;
 			}
+			*/
 			/*write(1, buffer, characters);*/ 
 			write(1, dolla_dolla, 2);
 	}
