@@ -1,6 +1,5 @@
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include "holberton.h"
+
 char *_strncpy(char *dest, char *src, int n)
 {
 	int i;
@@ -47,27 +46,6 @@ unsigned int find_command_length(char *s)
 }
 char **array_from_strtok(char *str)
 {
-	/*
-	char **res = NULL;
-	char *p = strtok(str, " ");
-	int n_spaces;
-
-	n_spaces = 0;
-	while (p)
-	{
-		res = realloc(res, sizeof(char *) * ++n_spaces);
-		if (res == NULL)
-			return (NULL);
-		
-		res[n_spaces - 1] = p;
-		p = strtok(NULL, " ");
-	}
-
-	res = realloc(res, sizeof(char *) * (n_spaces + 1));
-	res[n_spaces] = 0;
-	
-	return (res);
-	*/
 	char **token_holder;
 	char *token;
 	unsigned int length, i;
@@ -86,7 +64,7 @@ char **array_from_strtok(char *str)
 	*(token_holder + i) = NULL;
 	return (token_holder);
 }
-
+/*
 int main(void)
 {
 	char holberton[100] = "  HOLBERTON SCHOOL       ROCKS! ";
@@ -103,3 +81,4 @@ int main(void)
 	}		
 	return (EXIT_SUCCESS);
 }
+*/
