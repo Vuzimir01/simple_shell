@@ -32,6 +32,7 @@ int main(void)
 			}	/* DON'T FORGET TO FREE YOUR MALLOCS FROM THE TOKEN YOU BUILT */
 			else
 				wait(NULL);
+
 			write(1, dolla_dolla, 2);
 	}
 	if (characters == -1)
