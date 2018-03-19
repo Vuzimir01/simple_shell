@@ -22,20 +22,52 @@ unsigned int _strlen_const(const char *name)
 	return (i);
 }
 
+unsigned int find_semis(char *path)
+{
+	unsigned int semis, i;
+
+	i = 0;
+	semis = 1;
+	while (path[i])
+	{
+		if (path[i] == ':')
+			++semis;
+		++i;
+	}
+	return (semis);
+}
+
+char *_strncpy(char *dest, char *src, int n)
+{
+	int i;
+	
+	for (i = 0; i < n && src[i] != '\0'; i++)
+		dest[i] = src[i];
+	for ( ; i < n; i++)
+		dest[i] = '\0';
+
+	return (dest);
+}
 void print_env(const char *name)
 {
+	char **all_directories;
 	char *path_env, *directory;
-	unsigned int length;
+	unsigned int length, i;
 	path_env = _getenv(name);
+	
+	length = find_semis(path_env);
+	all_directories = malloc(sizeof(char *) * (length + 1));
 
+	i = 0;
 	directory = strtok(path_env, ":");
 	while (directory != NULL)
 	{
-		length = _strlen(directory);
-		write(1, directory, length);
-		write(1, "\n", 1);
+		all_directories[i] = malloc(_strlen(directory) + 1);
+		_strncpy(all_directories[i], directory, _strlen(directory));	
+		++i;
 		directory = strtok(NULL, ":");
 	}
+	all_directories[i] = NULL;
 }
 
 char *_getenv(const char *name)
