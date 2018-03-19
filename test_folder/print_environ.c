@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 int _strcmp(char *s1, char *s2);
 extern char **environ;
+char *_getenv(const char *name);
 
 unsigned int _strlen(char *s)
 {
@@ -18,6 +20,22 @@ unsigned int _strlen_const(const char *name)
 	while (name[i])
 		++i;
 	return (i);
+}
+
+void print_env(const char *name)
+{
+	char *path_env, *directory;
+	unsigned int length;
+	path_env = _getenv(name);
+
+	directory = strtok(path_env, ":");
+	while (directory != NULL)
+	{
+		length = _strlen(directory);
+		write(1, directory, length);
+		write(1, "\n", 1);
+		directory = strtok(NULL, ":");
+	}
 }
 
 char *_getenv(const char *name)
@@ -75,6 +93,6 @@ int _strcmp(char *s1, char *s2)
 
 int main(void)
 {
-	printf("Path ENV: %s\n", _getenv("PATH"));
+	print_env("PATH");
 	return (0);
 }
