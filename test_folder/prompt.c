@@ -8,7 +8,8 @@ int main(void)
 	ssize_t characters;
 	char *dolla_dolla = "$ ";
 	pid_t pid;
-	
+	struct stat fileStat;
+
 	buffer = NULL;
 	length = 0;
 
@@ -23,7 +24,12 @@ int main(void)
 				return (1);
 			}
 			if (pid == 0)
-				execve(commands[0], commands, NULL);
+			{	
+				if (stat(commands[0], &fileStat) == 0)
+					execve(commands[0], commands, NULL);
+				else
+					write(1, "No such file or directory\n", 26); 		
+			}	/* DON'T FORGET TO FREE YOUR MALLOCS FROM THE TOKEN YOU BUILT */
 			else
 				wait(NULL);
 			write(1, dolla_dolla, 2);
