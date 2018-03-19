@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <sys/stats.h>
 
 char *_strncpy(char *dest, char *src, int n);
 unsigned int _strlen(char *s);
