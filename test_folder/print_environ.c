@@ -70,12 +70,6 @@ char **store_env_variables(char *first_command)
 	}
 	all_directories[i] = NULL;
 
-	i = 0;
-	while (all_directories[i])
-	{
-		printf("%s\n", all_directories[i]);
-		++i;
-	}	
 	return (all_directories);
 }
 

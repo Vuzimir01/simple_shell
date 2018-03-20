@@ -9,7 +9,7 @@ char *_strncpy(char *dest, char *src, int n)
 	
 	for ( ; i < n; i++)
 		dest[i] = '\0';
-	
+
 	return (dest);
 }
 
@@ -52,7 +52,7 @@ char **array_from_strtok(char *str)
 	
 	str[_strlen(str) - 1] = '\0';
 	length = find_command_length(str);
-	token_holder = malloc(sizeof(char *) * (length + 1));
+	token_holder = malloc((sizeof(char *)) * (length + 1));
 	i = 0;
 	token = strtok(str," ");
 	while (token != NULL)
@@ -65,10 +65,11 @@ char **array_from_strtok(char *str)
 	token_holder[i] = NULL;
 	return (token_holder);
 }
+
 /*
 int main(void)
 {
-	char holberton[100] = "  HOLBERTON SCHOOL       ROCKS! ";
+	char holberton[100] = "/bin/ls Nick!\n";
 	char **commands;
 	unsigned int i;
 

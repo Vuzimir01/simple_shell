@@ -8,14 +8,15 @@ int main(void)
 	ssize_t characters;
 	char *dolla_dolla = "$ ";
 	pid_t pid;
-	struct stat fileStat;
+	struct stat fileStat, fileStat2;
 	int i, status;
+	char *exit_command = "exit";
 
 	buffer = NULL;
 	length = 0;
 	
 	write(1, dolla_dolla, 2);
-	while ((characters = getline(&buffer, &length, stdin)) != EOF)
+	while ((characters = getline(&buffer, &length, stdin) != -1))
 	{
 			commands = array_from_strtok(buffer);
 			pid = fork();
@@ -26,8 +27,14 @@ int main(void)
 			}
 			if (pid == 0)
 			{	
+				/* check if the command is a EXIT to exit the shell */
+				if (_strcmp(exit_command, commands[0]))
+				{
+					write(1, "im here", 7);
+					return (0);	
+				}
 				/* check if the command is a a $PATH that has an executable */
-				if (stat(commands[0], &fileStat) == 0)
+				else if (stat(commands[0], &fileStat) == 0)
 					execve(commands[0], commands, NULL);
 				/* check all $PATH VARIABLES for executable commands */
 				else
@@ -36,20 +43,26 @@ int main(void)
 					all_directories = store_env_variables(commands[0]);
 					while (all_directories[i])
 					{
-						if (stat(all_directories[i], &fileStat) == 0)									execve(all_directories[i], commands, NULL);
+						if (stat(all_directories[i], &fileStat2) == 0)
+							execve(all_directories[i], commands, NULL);
 						++i;
 					}
-				
-					free_all_directories(all_directories);
-					/*
-					write(1, "No such file or directory\n", 26);
-					*/
+					free_all_double_ptr(all_directories);
+					if (execve(commands[0], commands, NULL) == -1)
+						exit(0);
 				}
 			}	/* DON'T FORGET TO FREE YOUR MALLOCS FROM THE TOKEN YOU BUILT */
 			else
+			{
 				wait(&status);
-
+			}
+			
+			free(buffer);
+			free_all_double_ptr(commands);
+			length = 0;
+			buffer = NULL;
 			write(1, dolla_dolla, 2);
+		
 	}
 	if (characters == -1)
 		return (EXIT_FAILURE);
