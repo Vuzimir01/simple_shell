@@ -1,12 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-
-int _strcmp(char *s1, char *s2);
-extern char **environ;
-char *_getenv(const char *name);
-
+#include "holberton.h"
+/*
 unsigned int _strlen(char *s)
 {
 	unsigned int counter = 0;
@@ -14,6 +7,7 @@ unsigned int _strlen(char *s)
 		++counter;
 	return (counter);
 }
+*/
 unsigned int _strlen_const(const char *name)
 {
 	unsigned int i = 0;
@@ -37,23 +31,28 @@ unsigned int find_semis(char *path)
 	return (semis);
 }
 
-char *_strncpy(char *dest, char *src, int n)
+char *_strncpycmd(char *dest, char *src, char *command, unsigned int n, unsigned int c)
 {
-	int i;
+	unsigned int i, j;
 	
 	for (i = 0; i < n && src[i] != '\0'; i++)
 		dest[i] = src[i];
-	for ( ; i < n; i++)
-		dest[i] = '\0';
+	dest[i] = '/';
+	i++;
+	for (j = 0; j < c; j++, i++)
+		dest[i] = command[j];
+
+	dest[i] = '\0';
 
 	return (dest);
 }
-void print_env(const char *name)
+
+char **store_env_variables(char *first_command)
 {
 	char **all_directories;
 	char *path_env, *directory;
-	unsigned int length, i;
-	path_env = _getenv(name);
+	unsigned int length, i, directory_length, command_length;
+	path_env = _getenv("PATH");
 	
 	length = find_semis(path_env);
 	all_directories = malloc(sizeof(char *) * (length + 1));
@@ -62,12 +61,22 @@ void print_env(const char *name)
 	directory = strtok(path_env, ":");
 	while (directory != NULL)
 	{
-		all_directories[i] = malloc(_strlen(directory) + 1);
-		_strncpy(all_directories[i], directory, _strlen(directory));	
+		directory_length = _strlen(directory);
+		command_length = _strlen(first_command);
+		all_directories[i] = malloc(directory_length + command_length + 1);
+		_strncpycmd(all_directories[i], directory, first_command, directory_length, command_length);	
 		++i;
 		directory = strtok(NULL, ":");
 	}
 	all_directories[i] = NULL;
+
+	i = 0;
+	while (all_directories[i])
+	{
+		printf("%s\n", all_directories[i]);
+		++i;
+	}	
+	return (all_directories);
 }
 
 char *_getenv(const char *name)
@@ -122,9 +131,19 @@ int _strcmp(char *s1, char *s2)
 
 	return (1);
 }
-
+/*
 int main(void)
 {
-	print_env("PATH");
+	unsigned int i;
+	char **ptr;
+		
+	ptr = store_env_variables("ls");
+	i = 0;
+	while (ptr[i])
+	{
+		printf("%s\n", ptr[i]);
+		++i;
+	}
 	return (0);
 }
+*/
