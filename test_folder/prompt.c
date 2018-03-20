@@ -30,8 +30,8 @@ int main(void)
 				/* check if the command is a EXIT to exit the shell */
 				if (_strcmp(exit_command, commands[0]))
 				{
-					write(1, "im here", 7);
-					return (0);	
+					/*free the buffer */
+					exit(0);	
 				}
 				/* check if the command is a a $PATH that has an executable */
 				else if (stat(commands[0], &fileStat) == 0)
@@ -47,7 +47,7 @@ int main(void)
 							execve(all_directories[i], commands, NULL);
 						++i;
 					}
-					free_all_double_ptr(all_directories);
+					
 					if (execve(commands[0], commands, NULL) == -1)
 						exit(0);
 				}
