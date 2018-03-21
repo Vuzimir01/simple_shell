@@ -39,7 +39,7 @@ char *_strncpycmd(char *dest, char *src, char *command, unsigned int n, unsigned
 		dest[i] = src[i];
 	dest[i] = '/';
 	i++;
-	for (j = 0; j < c; j++, i++)
+	for (j = 0; j < c && command[j] != '\0'; j++, i++)
 		dest[i] = command[j];
 
 	dest[i] = '\0';
@@ -62,8 +62,9 @@ char **store_env_variables(char *first_command)
 	while (directory != NULL)
 	{
 		directory_length = _strlen(directory);
-		command_length = _strlen(first_command) + 1;
-		all_directories[i] = malloc(directory_length + command_length + 1);
+		command_length = _strlen(first_command);
+		/* add 2 to malloc for \0 and extra "/" for the slash to append ls */
+		all_directories[i] = malloc(sizeof(char) * (directory_length + command_length + 2));
 		_strncpycmd(all_directories[i], directory, first_command, directory_length, command_length);	
 		++i;
 		directory = strtok(NULL, ":");

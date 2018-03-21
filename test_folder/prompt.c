@@ -58,10 +58,13 @@ int main(void)
 							execve(all_directories[i], commands, NULL);
 						++i;
 					}
-					
+				
 					write(1, "No such file or directory\n", 26);	
-					if (execve(commands[0], commands, NULL) == -1)
-						exit(0);
+				
+					free(buffer);
+					free_all_double_ptr(commands);	
+					free_all_double_ptr(all_directories);
+					exit(0);
 				}
 			}	/* DON'T FORGET TO FREE YOUR MALLOCS FROM THE TOKEN YOU BUILT */
 			else
