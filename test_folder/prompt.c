@@ -27,9 +27,17 @@ int main(void)
 				exit(1);
 			}
 			if (pid == 0)
-			{	
+			{
+				/* check if commands is NULL or all empty spaces */
+				if (commands == NULL)
+				{
+					/* free(commands) */
+					printf("I made it!\n");
+					free(buffer);
+					exit(0);
+				}
 				/* check if the command is a EXIT to exit the shell */
-				if (_strcmp(exit_command, commands[0]))
+				else if (_strcmp(exit_command, commands[0]))
 				{
 					free_all_double_ptr(commands);
 					free(buffer);	
@@ -70,20 +78,27 @@ int main(void)
 			else
 			{
 				wait(&status);
+			
+				if (commands == NULL)
+				{
 				
-				if (_strcmp(exit_command, commands[0]))
+				}
+				else if (_strcmp(exit_command, commands[0]))
 				{
 					free(buffer);
 					free_all_double_ptr(commands);
 					exit(0);
 				}
+				else if (commands != NULL)
+				{
+					free_all_double_ptr(commands);	
+					free(buffer);	
+				}
 			}
-		
-			free_all_double_ptr(commands);
-			free(buffer);
+
 			length = 0;
 			buffer = NULL;
-
+			
 			write(1, dolla_dolla, 2);
 		
 	}

@@ -52,6 +52,11 @@ char **array_from_strtok(char *str)
 
 	str[_strlen(str) - 1] = '\0';
 	length = find_command_length(str);
+	if (length == 0)
+	{
+		printf("I'm 0\n");
+		return (NULL);
+	}
 	token_holder = malloc((sizeof(char *)) * (length + 1));
 	i = 0;
 	token = strtok(str," ");
@@ -68,12 +73,16 @@ char **array_from_strtok(char *str)
 /*
 int main(void)
 {
-	char holberton[100] = "/bin/ls Nick!\n";
+	char holberton[100] = "                ";
 	char **commands;
 	unsigned int i;
 
 	commands = array_from_strtok(holberton);
-
+	if (commands == NULL)
+	{
+		printf("It's NULL\n");
+		return (0);
+	}
 	i = 0;
 	while (commands[i] != '\0')
 	{
