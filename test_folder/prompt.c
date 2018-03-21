@@ -11,6 +11,7 @@ int main(void)
 	struct stat fileStat, fileStat2;
 	int i, status;
 	char *exit_command = "exit";
+	char *env_command = "env";
 	
 	buffer = NULL;
 	length = 0;
@@ -23,20 +24,31 @@ int main(void)
 			if (pid == -1)
 			{
 				perror("Error:");
-				return (1);
+				exit(1);
 			}
 			if (pid == 0)
 			{	
 				/* check if the command is a EXIT to exit the shell */
 				if (_strcmp(exit_command, commands[0]))
 				{
-					/*free the buffer */
-					printf("Entered Flag");
+					free_all_double_ptr(commands);
+					free(buffer);	
+					exit(0);
+				}
+				/* check if the command is ENV to print out environment variables */
+				else if (_strcmp(env_command, commands[0]))
+				{
+					free(buffer);
+					free_all_double_ptr(commands);
+					print_env();
 					exit(0);
 				}
 				/* check if the command is a a $PATH that has an executable */
 				else if (stat(commands[0], &fileStat) == 0)
+				{
+					free(buffer);
 					execve(commands[0], commands, NULL);
+				}
 				/* check all $PATH VARIABLES for executable commands */
 				else
 				{
@@ -60,7 +72,8 @@ int main(void)
 				
 				if (_strcmp(exit_command, commands[0]))
 				{
-					printf("exited");
+					free(buffer);
+					free_all_double_ptr(commands);
 					exit(0);
 				}
 			}

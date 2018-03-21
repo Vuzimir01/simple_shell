@@ -125,6 +125,23 @@ int _strcmp(char *s1, char *s2)
 
 	return (1);
 }
+
+void print_env(void)
+{
+	extern char **environ;
+	unsigned int i, length;
+
+	i = 0;
+	while (environ[i])
+	{
+		/* find the lenght of each env variables */
+		length = _strlen(environ[i]);
+		/* write it out the the stdout */
+		write(1, environ[i], length);
+		write(1, "\n", 1);
+		++i;
+	}
+}
 /*
 int main(void)
 {

@@ -20,6 +20,7 @@ char **store_env_variables(char *first_command);
 char *_getenv(const char *name);
 int _strcmp(char *s1, char *s2);
 char *_strncpycmd(char *dest, char *src, char *command, unsigned int n, unsigned int c);
+void print_env(void);
 
 void free_all_double_ptr(char **d_ptr);
 #endif /* _HOLBERTON_H_ */
