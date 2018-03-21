@@ -11,7 +11,7 @@ int main(void)
 	struct stat fileStat, fileStat2;
 	int i, status;
 	char *exit_command = "exit";
-
+	
 	buffer = NULL;
 	length = 0;
 	
@@ -31,7 +31,8 @@ int main(void)
 				if (_strcmp(exit_command, commands[0]))
 				{
 					/*free the buffer */
-					exit(0);	
+					printf("Entered Flag");
+					exit(0);
 				}
 				/* check if the command is a a $PATH that has an executable */
 				else if (stat(commands[0], &fileStat) == 0)
@@ -48,6 +49,7 @@ int main(void)
 						++i;
 					}
 					
+					write(1, "No such file or directory\n", 26);	
 					if (execve(commands[0], commands, NULL) == -1)
 						exit(0);
 				}
@@ -55,12 +57,19 @@ int main(void)
 			else
 			{
 				wait(&status);
+				
+				if (_strcmp(exit_command, commands[0]))
+				{
+					printf("exited");
+					exit(0);
+				}
 			}
-			
-			free(buffer);
+		
 			free_all_double_ptr(commands);
+			free(buffer);
 			length = 0;
 			buffer = NULL;
+
 			write(1, dolla_dolla, 2);
 		
 	}
