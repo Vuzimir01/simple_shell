@@ -31,8 +31,6 @@ int main(void)
 				/* check if commands is NULL or all empty spaces */
 				if (commands == NULL)
 				{
-					/* free(commands) */
-					printf("I made it!\n");
 					free(buffer);
 					exit(0);
 				}
@@ -78,10 +76,10 @@ int main(void)
 			else
 			{
 				wait(&status);
-			
 				if (commands == NULL)
 				{
-				
+					free(buffer);
+					free_all_double_ptr(commands);
 				}
 				else if (_strcmp(exit_command, commands[0]))
 				{

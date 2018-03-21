@@ -53,10 +53,8 @@ char **array_from_strtok(char *str)
 	str[_strlen(str) - 1] = '\0';
 	length = find_command_length(str);
 	if (length == 0)
-	{
-		printf("I'm 0\n");
 		return (NULL);
-	}
+	
 	token_holder = malloc((sizeof(char *)) * (length + 1));
 	i = 0;
 	token = strtok(str," ");

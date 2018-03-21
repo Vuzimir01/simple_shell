@@ -3,6 +3,10 @@
 void free_all_double_ptr(char **d_ptr)
 {
 	unsigned int i = 0;
+	
+	if (d_ptr == NULL)
+		return;
+
 	while (d_ptr[i])
 	{
 		free(d_ptr[i]);
