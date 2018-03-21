@@ -62,7 +62,7 @@ char **store_env_variables(char *first_command)
 	while (directory != NULL)
 	{
 		directory_length = _strlen(directory);
-		command_length = _strlen(first_command);
+		command_length = _strlen(first_command) + 1;
 		all_directories[i] = malloc(directory_length + command_length + 1);
 		_strncpycmd(all_directories[i], directory, first_command, directory_length, command_length);	
 		++i;

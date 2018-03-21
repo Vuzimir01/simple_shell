@@ -43,12 +43,10 @@ int main(void)
 					print_env();
 					exit(0);
 				}
-				/* check if the command is a a $PATH that has an executable */
+				/* check if the command is a $PATH that has an executable */
 				else if (stat(commands[0], &fileStat) == 0)
-				{
-					free(buffer);
 					execve(commands[0], commands, NULL);
-				}
+				
 				/* check all $PATH VARIABLES for executable commands */
 				else
 				{
