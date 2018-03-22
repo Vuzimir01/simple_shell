@@ -1,6 +1,10 @@
 #include "holberton.h"
-
-
+/**
+ * find_command_length - finds the number of commands in the string
+ * @s: the string to find the commands
+ *
+ * Return: number of commands, unsigned int
+ */
 unsigned int find_command_length(char *s)
 {
 	unsigned int commands, i, flag;
@@ -12,16 +16,25 @@ unsigned int find_command_length(char *s)
 	{
 		if (s[i] != ' ')
 			flag = 1;
-		
+
 		if ((flag && s[i + 1] == ' ') || (flag && s[i + 1] == '\0'))
 		{
 			++commands;
-			flag = 0;	
-		}	
+			flag = 0;
+		}
 		++i;
 	}
 	return (commands);
 }
+/**
+ * array_from_strtok - creates a double pointer array that holders pointers
+ * to each string from the command line
+ * @str: the commands from the terminal when you type them to the standard
+ * input
+ *
+ * Return: double pointer array of pointers that are commands to interpret
+ * and execute
+ */
 char **array_from_strtok(char *str)
 {
 	char **token_holder;
@@ -32,10 +45,10 @@ char **array_from_strtok(char *str)
 	length = find_command_length(str);
 	if (length == 0)
 		return (NULL);
-	
+
 	token_holder = malloc((sizeof(char *)) * (length + 1));
 	i = 0;
-	token = strtok(str," ");
+	token = strtok(str, " ");
 	while (token != NULL)
 	{
 		token_holder[i] = malloc(_strlen(token) + 1);
@@ -46,25 +59,3 @@ char **array_from_strtok(char *str)
 	token_holder[i] = NULL;
 	return (token_holder);
 }
-/*
-int main(void)
-{
-	char holberton[100] = "                ";
-	char **commands;
-	unsigned int i;
-
-	commands = array_from_strtok(holberton);
-	if (commands == NULL)
-	{
-		printf("It's NULL\n");
-		return (0);
-	}
-	i = 0;
-	while (commands[i] != '\0')
-	{
-		printf("%s\n", commands[i]);
-		++i;
-	}		
-	return (EXIT_SUCCESS);
-}
-*/
