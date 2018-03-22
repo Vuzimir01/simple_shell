@@ -54,7 +54,7 @@ drwxrwxr-x 7 vagrant vagrant  4096 Mar 21 21:05 SHELL_TEST
 -rw-rw-r-- 1 vagrant vagrant  1302 Mar 22 20:25 strtok_example.c
 ```
 ## Example Video
-<iframe title="Simple Shell" width="480" height="390" src="https://www.youtube.com/watch?v=qtsAFMF0wRc&feature=youtu.be" frameborder="0" allowfullscreen></iframe>
+[![simpleshell](https://i.ytimg.com/vi/qtsAFMF0wRc/hqdefault.jpg)](https://www.youtube.com/embed/qtsAFMF0wRc?autoplay=1 "simpleshell")
 
 ## To do
 TBD
