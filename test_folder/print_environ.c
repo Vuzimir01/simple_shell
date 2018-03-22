@@ -1,20 +1,5 @@
 #include "holberton.h"
-/*
-unsigned int _strlen(char *s)
-{
-	unsigned int counter = 0;
-	while (s[counter])
-		++counter;
-	return (counter);
-}
-*/
-unsigned int _strlen_const(const char *name)
-{
-	unsigned int i = 0;
-	while (name[i])
-		++i;
-	return (i);
-}
+
 
 unsigned int find_semis(char *path)
 {
@@ -111,20 +96,6 @@ char *_getenv(const char *name)
 
 	free(name_copy);
 	return (NULL);
-}
-
-int _strcmp(char *s1, char *s2)
-{
-	unsigned int i = 0;
-
-	while (s1[i])
-	{
-		if (s1[i] != s2[i])
-			return (0);
-		++i;
-	}
-
-	return (1);
 }
 
 void print_env(void)

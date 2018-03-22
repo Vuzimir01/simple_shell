@@ -1,27 +1,5 @@
 #include "holberton.h"
 
-char *_strncpy(char *dest, char *src, int n)
-{
-	int i;
-	
-	for (i = 0; i < n && src[i] != '\0'; i++)
-		dest[i] = src[i];
-	
-	for ( ; i < n; i++)
-		dest[i] = '\0';
-
-	return (dest);
-}
-
-unsigned int _strlen(char *s)
-{
-	unsigned int counter = 0;
-	
-	while (s[counter] != '\0')
-		++counter;
-	
-	return (counter);
-}
 
 unsigned int find_command_length(char *s)
 {

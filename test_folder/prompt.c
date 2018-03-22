@@ -1,24 +1,27 @@
 #include "holberton.h"
-
+/**
+ * main - basic shell recreation
+ *
+ *
+ * Return: 0 on exit, 1 if any failures happen
+ */
 int main(void)
 {
 	char *buffer;
 	char **commands, **all_directories;
 	size_t length;
 	ssize_t characters;
-	char *dolla_dolla = "$ ";
+	char *dolla_dolla = "$ ", *exit_command = "exit", *env_command = "env";
 	pid_t pid;
 	struct stat fileStat, fileStat2;
 	int i, status;
-	char *exit_command = "exit";
-	char *env_command = "env";
-	
+
 	buffer = NULL;
 	length = 0;
 
 	if (isatty(STDIN_FILENO))
 		write(1, dolla_dolla, 2);
-	
+
 	while ((characters = getline(&buffer, &length, stdin)) != EOF)
 	{
 		commands = array_from_strtok(buffer);
@@ -40,7 +43,7 @@ int main(void)
 			else if (_strcmp(exit_command, commands[0]))
 			{
 				free_all_double_ptr(commands);
-				free(buffer);	
+				free(buffer);
 				exit(0);
 			}
 			/* check if the command is ENV to print out environment variables */
@@ -54,7 +57,6 @@ int main(void)
 			/* check if the command is a $PATH that has an executable */
 			else if (stat(commands[0], &fileStat) == 0)
 				execve(commands[0], commands, NULL);
-			
 			/* check all $PATH VARIABLES for executable commands */
 			else
 			{
@@ -66,20 +68,20 @@ int main(void)
 						execve(all_directories[i], commands, NULL);
 					++i;
 				}
-			
-				write(1, "No such file or directory\n", 26);	
-			
+
+				write(1, "No such file or directory\n", 26);
+
 				free(buffer);
-				free_all_double_ptr(commands);	
+				free_all_double_ptr(commands);
 				free_all_double_ptr(all_directories);
 				exit(0);
 			}
-		}	
+		}
 		/* DON'T FORGET TO FREE YOUR MALLOCS FROM THE TOKEN YOU BUILT */
 		else
 		{
 			wait(&status);
-		
+
 			if (commands == NULL)
 			{
 				free(buffer);
@@ -93,19 +95,19 @@ int main(void)
 			}
 			else if (commands != NULL)
 			{
-				free_all_double_ptr(commands);	
-				free(buffer);	
+				free_all_double_ptr(commands);
+				free(buffer);
 			}
 		}
 		length = 0;
 		buffer = NULL;
-		
+
 		if (isatty(STDIN_FILENO))
 			write(1, dolla_dolla, 2);
-	}	
+	}
 	if (characters == -1)
 		return (EXIT_FAILURE);
 
-	free(buffer);	
-	return (EXIT_SUCCESS);	
+	free(buffer);
+	return (EXIT_SUCCESS);
 }
