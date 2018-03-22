@@ -1,0 +1,56 @@
+.TH man 1 "16 March 2018" "0.32" "Simple UNIX Shell Manual"
+.SH NAME
+.B bold
+.I FORMAT [ARGUMENT]...
+.SH DESCRIPTION
+.SH OPTIONS
+.SH ARGUMENTS
+.SH INVOCATION
+interactive vs non
+.SH DEFINITIONS
+.SH RESERVED WORDS
+.SH SHELL GRAMMAR
+.SH COMMENTS
+.SH QUOTING
+.SH PARAMETERS
+-parameter definition
+-positional parameters
+-special parameters
+-shell variables
+--The  following  variables  are  used  by  the  shell.  In some cases, bash
+       assigns a default value to a variable; these cases are noted below.
+-PATH
+
+-arrays
+
+.SH EXPANSION
+.SH REDIRECTION
+.SH ALIASES
+.SH FUNCTIONS
+getline
+strtok
+
+.SH COMMAND EXECUTION
+.SH COMMAND EXECUTION ENVIRONMENT
+?
+.SH ENVIRONMENT
+.SH EXIT STATUS
+.SH SIGNALS
+.SH JOB CONTROL
+.SH PROMPTING
+.SH READLINE
+.SH HISTORY
+.SH HISTORY EXPANSION
+.SH SHELL BUILTIN COMMANDS
+exit
+env
+history
+.SH RESTRITCTED SHELL
+.SH SEE ALSO
+.SH FILES
+.I italic
+.SH HISTORY
+.SH BUGS
+Report _printf bugs to https://github.com/nickolasteixeira
+.SH AUTHOR
+Nickolas Teixeira, Amy Galles
