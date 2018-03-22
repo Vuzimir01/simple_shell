@@ -1,7 +1,7 @@
 SIMPLE SHELL
 ============
 
-Simple Shell is a end of semester project for students at [Holberton](https://www.holbertonschool.com/) where we explore, understand and build the functionality of the shell command language. 
+Simple Shell is a end of semester project for students at [Holberton](https://www.holbertonschool.com/) where we explore, understand and build a working functional simple shell program.
 
 ## Audience
 
@@ -12,8 +12,14 @@ Simple Shell was built and tested in the Ubuntu 14.04 LTS via Vagrant in Virtual
 
 ## Respository Contents
 Simple Shell files:
+
 | **File** | **Description** |
-| more to come | more to come |
+|----------|-----------------|
+| prompt.c | Contains the int main(void) function, entry point |
+| strtok_example.c | Contains find_command_length and array_form_strtok functions |
+| helper_function.c | Contains all helper functions: _strncpy, _strlen_const, _strcmp, _strlen |
+| environment.c | Contains all functions that handle environment/path |
+| free_it_all.c | Contains function that frees memory |
 
 ## How to Install
 Clone the repo below
@@ -49,6 +55,7 @@ drwxrwxr-x 7 vagrant vagrant  4096 Mar 21 21:05 SHELL_TEST
 ```
 
 ## To do
+TBD
 
 ## Authors
 * [**Amy Galles**](https://github.com/AmyLGalles)
