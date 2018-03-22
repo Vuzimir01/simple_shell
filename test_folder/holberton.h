@@ -8,6 +8,8 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 
+extern char **environ;
+
 /* strtok_example.c */
 unsigned int find_command_length(char *s);
 char **array_from_strtok(char *str);
@@ -20,9 +22,9 @@ unsigned int _strlen(char *s);
 
 /* print_environ.c */
 unsigned int find_semis(char *path);
-char **store_env_variables(char *first_command);
+char **store_env_variables(char *fir_com);
 char *_getenv(const char *name);
-char *_strncpycmd(char *dest, char *src, char *command, unsigned int n, unsigned int c);
+char *_strncpycmd(char *dest, char *src, char *command, int n, int c);
 void print_env(void);
 
 /*free_it_all.c */
