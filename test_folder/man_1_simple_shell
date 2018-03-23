@@ -1,17 +1,52 @@
 .TH man 1 "16 March 2018" "0.32" "Simple UNIX Shell Manual"
 .SH NAME
-.B bold
+shell - simple shell
+.SH SYNOPSIS
+.B ./hsh
+
+[command] [options]
+
+.B .hsh
+[command] [options]
+.SH COPYRIGHT
+.B Simple Shell
+ is Copyright (C) Nickolas Teixeira and Amy Galles and licensed under the MIT license.
 .I FORMAT [ARGUMENT]...
 .SH DESCRIPTION
+.B Simple Shell 
+is an end of semester project for students at Holberton School where we expore, understand and build a working functional simple shell program.
 .SH OPTIONS
+.B Simple Shell
+operates in both 
+.Iinteractive 
+and 
+.I non-interactive
+ mode. The user may initiate 
+.B simple shell
+and begin working or initate 
+.B simple shell
+using commands meant to be run by the program.
 .SH ARGUMENTS
+The first argument, argument 0 is understood to be the command to be run by 
+.Bsimple shell
+and arguments following as modifiers or options.
 .SH INVOCATION
-interactive vs non
+.Bsimple shell
+may be invoked with the same functionality in 
+.I interactive 
+or 
+.I non-interactive 
+mode.  The user may quit the program by typing "quit", "Ctrl + D", or "Ctrl + C" on the command line.
+When the program quits or a command has been executed, 
+.Bsimple shell
+ returns with a new prompt: $
+
+.B
 .SH DEFINITIONS
 .SH RESERVED WORDS
+exit env
 .SH SHELL GRAMMAR
 .SH COMMENTS
-.SH QUOTING
 .SH PARAMETERS
 -parameter definition
 -positional parameters
@@ -40,17 +75,54 @@ strtok
 .SH PROMPTING
 .SH READLINE
 .SH HISTORY
-.SH HISTORY EXPANSION
+The 
+.B history 
+built-in displays the history list, one command per line, preceded with line numbers, starting with 0. On exit the entire history is written to a file named
+.I simple_shell_history
+in the 
+.I $HOME
+directory.
 .SH SHELL BUILTIN COMMANDS
-exit
-env
-history
-.SH RESTRITCTED SHELL
+The commands 
+.B exit
+and 
+.B env
+are handled automatically by 
+.B simple shell
+.SH EXIT STATUS
+.SH
+.SH PROMPTING
+
 .SH SEE ALSO
+.I sh(1)
+,
+.I bash(1)
+,
+.I _printf(3)
 .SH FILES
-.I italic
+.I /simple_shell/prompt.c 
+- Contains the int main(void) function, entry point.
+
+.I /simple_shell/strtok_example.c 
+- Contains function that stores commands in double pointer: 
+.B find_command_length, array_form_strtok functions.
+
+.I helper_function.c 
+- Contains all helper functions:
+.B _strncpy,_strlen_const,_strcmp,_strlen
+
+.I environment.c 
+- Contains all functions that handle environment/path: 
+.B find_semis, store_env_variables, _getenv, _strncpycmd, print_env
+
+.I free_it_all.c 
+- Contains function that frees memory:
+.B free_it_all
+
 .SH HISTORY
 .SH BUGS
-Report _printf bugs to https://github.com/nickolasteixeira
+Report 
+.B simple shell
+ bugs to https://github.com/nickolasteixeira
 .SH AUTHOR
 Nickolas Teixeira, Amy Galles
