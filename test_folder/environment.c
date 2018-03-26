@@ -52,7 +52,7 @@ char *_strncpycmd(char *dest, char *src, char *command, int n, int c)
  *
  * Return: memory address of the double pointer array
  */
-char **store_env_variables(char *fir_com)
+char **store_env_variables(char *fir_com, char **environ)
 {
 	/* fir_com is the first command from the shell */
 	char **all_directories;
@@ -60,7 +60,7 @@ char **store_env_variables(char *fir_com)
 	unsigned int length, i;
 	int dir_length, com_length;
 
-	path_env = _getenv("PATH");
+	path_env = _getenv("PATH", environ);
 	length = find_semis(path_env);
 	all_directories = malloc(sizeof(char *) * (length + 1));
 	if (all_directories == NULL)
@@ -93,7 +93,7 @@ char **store_env_variables(char *fir_com)
  *
  * Return: the value associated with the variable
  */
-char *_getenv(const char *name)
+char *_getenv(const char *name, char **environ)
 {
 	char *env_value;
 	char *name_copy;
@@ -105,7 +105,7 @@ char *_getenv(const char *name)
 	if (name_copy == NULL)
 		return (NULL);
 	/* copy the contents of the name argument to the new variable, name_copy */
-	_strncpyconst(name_copy, name, length);	
+	_strncpyconst(name_copy, name, length);
 	/*
 	 * find the enviroment variable that matches the name_copy variable
 	 * assign the value to the value variable and return the address
@@ -130,6 +130,7 @@ char *_getenv(const char *name)
 
 /**
  * print_env - prints all of the environment variables to the output
+ * @environ: all environment variables for the user
  *
  * Return: void
  */

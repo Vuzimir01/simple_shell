@@ -24,7 +24,10 @@ int main(int argc, char **argv, char **env)
 
 	while ((characters = getline(&buffer, &length, stdin)) != EOF)
 	{
-		/* counting the number of times the prompt shows up to display correct error */
+		/* 
+		 * counting the number of times the prompt 
+		 * shows up to display correct error
+		 */
 		++count;
 		commands = array_from_strtok(buffer);
 		pid = fork();
@@ -63,7 +66,7 @@ int main(int argc, char **argv, char **env)
 			else
 			{
 				i = 0;
-				all_directories = store_env_variables(commands[0]);
+				all_directories = store_env_variables(commands[0], env);
 				while (all_directories[i])
 				{
 					if (stat(all_directories[i], &fileStat2) == 0)

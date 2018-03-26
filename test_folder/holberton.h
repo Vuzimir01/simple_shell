@@ -23,8 +23,8 @@ void build_error_message(char **av, int count);
 
 /* environment.c */
 unsigned int find_semis(char *path);
-char **store_env_variables(char *fir_com);
-char *_getenv(const char *name);
+char **store_env_variables(char *fir_com, char **environ);
+char *_getenv(const char *name, char **environ);
 char *_strncpycmd(char *dest, char *src, char *command, int n, int c);
 void print_env(char **environ);
 
