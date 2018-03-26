@@ -19,7 +19,6 @@ char *_strncpyconst(char *dest, const char *src, int n);
 unsigned int _strlen_const(const char *name);
 int _strcmp(char *s1, char *s2);
 unsigned int _strlen(char *s);
-void build_error_message(char **av, int count);
 
 /* environment.c */
 unsigned int find_semis(char *path);
@@ -30,4 +29,8 @@ void print_env(char **environ);
 
 /*free_it_all.c */
 void free_all_double_ptr(char **d_ptr);
+
+/*error_message.c*/
+void build_error_message(char **av, char *fir_com, int count);
+int _putchar(char c);
 #endif /* _HOLBERTON_H_ */

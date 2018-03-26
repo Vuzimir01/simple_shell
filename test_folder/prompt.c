@@ -18,9 +18,9 @@ int main(int argc, char **argv, char **env)
 	(void)argc;
 
 	buffer = NULL, length = 0, count = 0;
-	
+
 	if (isatty(STDIN_FILENO))
-		write(STDIN_FILENO, dolla_dolla, 2);
+		write(STDOUT_FILENO, dolla_dolla, 2);
 
 	while ((characters = getline(&buffer, &length, stdin)) != EOF)
 	{
@@ -74,7 +74,7 @@ int main(int argc, char **argv, char **env)
 					++i;
 				}
 
-				build_error_message(argv, count);
+				build_error_message(argv, commands[0], count);
 				/*write(1, "No such file or directory\n", 26);*/
 				free(buffer);
 				free_all_double_ptr(commands);
@@ -108,7 +108,7 @@ int main(int argc, char **argv, char **env)
 		buffer = NULL;
 
 		if (isatty(STDIN_FILENO))
-			write(STDIN_FILENO, dolla_dolla, 2);
+			write(STDOUT_FILENO, dolla_dolla, 2);
 	}
 	if (characters == -1)
 		return (EXIT_FAILURE);

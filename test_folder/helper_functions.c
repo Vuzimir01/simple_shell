@@ -1,14 +1,4 @@
 #include "holberton.h"
-void build_error_message(char **av, int count)
-{
-	(void)count;
-	write(1, av[0], _strlen(av[0]));
-	write(1, ": :", 3);
-	write(1, av[2], _strlen(av[1]));
-	write(1, ": not found\n", 12);
-}
-
-
 /**
  * _strcmp - compares two strings for equality
  * @s1: string 1
