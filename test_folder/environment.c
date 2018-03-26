@@ -49,6 +49,7 @@ char *_strncpycmd(char *dest, char *src, char *command, int n, int c)
  * store_env_variables - creates a double pointer array,
  * where it stores each path directory as a single pointer, NULL terminated
  * @fir_com: first command that you type in the prompt
+ * @environ: the environment variables
  *
  * Return: memory address of the double pointer array
  */
@@ -90,6 +91,7 @@ char **store_env_variables(char *fir_com, char **environ)
 /**
  * _getenv - gets the environment variable value
  * @name: name of the environment vaariable you are looking for
+ * @environ: the enviroment variables
  *
  * Return: the value associated with the variable
  */

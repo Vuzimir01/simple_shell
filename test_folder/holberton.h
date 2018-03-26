@@ -7,7 +7,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
-
+#include <signal.h>
 
 /* strtok_example.c */
 unsigned int find_command_length(char *s);

@@ -1,7 +1,9 @@
 #include "holberton.h"
 /**
  * main - basic shell recreation
- *
+ * @argc: argument count
+ * @argv: argument vector
+ * @env: environment variables
  *
  * Return: 0 on exit, 1 if any failures happen
  */
@@ -24,8 +26,8 @@ int main(int argc, char **argv, char **env)
 
 	while ((characters = getline(&buffer, &length, stdin)) != EOF)
 	{
-		/* 
-		 * counting the number of times the prompt 
+		/*
+		 * counting the number of times the prompt
 		 * shows up to display correct error
 		 */
 		++count;

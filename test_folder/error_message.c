@@ -3,14 +3,14 @@
  * _putchar - puts a char to the STD
  * @c: character to write out
  *
- * Return: int to print 
+ * Return: int to print
  */
 int _putchar(char c)
 {
 	return (write(STDOUT_FILENO, &c, 1));
 }
 /**
- * build_error_message - builds and writes an error message similar to the sh error
+ * build_error_message - writes an error message similar to the sh error
  * when command not found
  * @av: the argv from the int main function
  * @fir_com: first command to print if not found
@@ -21,8 +21,8 @@ int _putchar(char c)
 void build_error_message(char **av, char *fir_com, int count)
 {
 	int mul, numlength, copy;
-	
-	write(1, av[0], _strlen(av[0]));
+
+	write(STDOUT_FILENO, av[0], _strlen(av[0]));
 	write(1, ": ", 2);
 
 	copy = count;
@@ -44,8 +44,8 @@ void build_error_message(char **av, char *fir_com, int count)
 		mul /= 10;
 	}
 	_putchar(count % 10 + '0');
-	write(1, ": ", 2);
-	write(1, fir_com, _strlen(fir_com));
-	write(1, ": not found\n", 12);
+	write(STDOUT_FILENO, ": ", 2);
+	write(STDOUT_FILENO, fir_com, _strlen(fir_com));
+	write(STDOUT_FILENO, ": not found\n", 12);
 }
 

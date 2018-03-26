@@ -68,7 +68,14 @@ char *_strncpy(char *dest, char *src, int n)
 
 	return (dest);
 }
-
+/**
+ * _strncpyconst - copies one constant string to another string
+ * @dest: destination string to copy from
+ * @src: string to copy to
+ * @n: the length to copy
+ *
+ * Return: the dest memory address
+ */
 char *_strncpyconst(char *dest, const char *src, int n)
 {
 	int i;
