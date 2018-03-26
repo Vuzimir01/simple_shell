@@ -5,7 +5,7 @@
  *
  * Return: 0 on exit, 1 if any failures happen
  */
-int main(void)
+int main(int argc, char **argv, char **env)
 {
 	char *buffer;
 	char **commands, **all_directories;
@@ -15,6 +15,7 @@ int main(void)
 	pid_t pid;
 	struct stat fileStat, fileStat2;
 	int i, status;
+	(void)argc, (void)argv;
 
 	buffer = NULL;
 	length = 0;
@@ -51,7 +52,7 @@ int main(void)
 			{
 				free(buffer);
 				free_all_double_ptr(commands);
-				print_env();
+				print_env(env);
 				exit(0);
 			}
 			/* check if the command is a $PATH that has an executable */

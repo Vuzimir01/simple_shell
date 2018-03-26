@@ -25,7 +25,7 @@ unsigned int find_semis(char *path);
 char **store_env_variables(char *fir_com);
 char *_getenv(const char *name);
 char *_strncpycmd(char *dest, char *src, char *command, int n, int c);
-void print_env(void);
+void print_env(char **environ);
 
 /*free_it_all.c */
 void free_all_double_ptr(char **d_ptr);

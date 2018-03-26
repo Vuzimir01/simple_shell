@@ -131,7 +131,7 @@ char *_getenv(const char *name)
  *
  * Return: void
  */
-void print_env(void)
+void print_env(char **environ)
 {
 	unsigned int i, length;
 
