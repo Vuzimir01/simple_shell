@@ -16,7 +16,7 @@ Simple Shell files:
 | **File** | **Description** |
 |----------|-----------------|
 | prompt.c | Contains the int main(void) function, entry point |
-| strtok_example.c | Contains function that store commands in double pointer: **find_command_length**, **array_form_strtok functions** |
+| strtok_example.c | Contains function that store commands in double pointer: **find_command_length**, **array_from_strtok functions** |
 | helper_function.c | Contains all helper functions: **_strncpy**,**_strlen_const**, **_strcmp**,**_strlen** |
 | environment.c | Contains all functions that handle environment/path: **find_semis**, **store_env_variables**, **_getenv**, **_strncpycmd**, **print_env** |
 | free_it_all.c | Contains function that frees memory: **free_it_all** |
