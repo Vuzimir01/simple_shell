@@ -14,17 +14,18 @@ int main(int argc, char **argv, char **env)
 	char *dolla_dolla = "$ ", *exit_command = "exit", *env_command = "env";
 	pid_t pid;
 	struct stat fileStat, fileStat2;
-	int i, status;
-	(void)argc, (void)argv;
+	int i, status, count;
+	(void)argc;
 
-	buffer = NULL;
-	length = 0;
-
+	buffer = NULL, length = 0, count = 0;
+	
 	if (isatty(STDIN_FILENO))
-		write(1, dolla_dolla, 2);
+		write(STDIN_FILENO, dolla_dolla, 2);
 
 	while ((characters = getline(&buffer, &length, stdin)) != EOF)
 	{
+		/* counting the number of times the prompt shows up to display correct error */
+		++count;
 		commands = array_from_strtok(buffer);
 		pid = fork();
 		if (pid == -1)
@@ -70,8 +71,8 @@ int main(int argc, char **argv, char **env)
 					++i;
 				}
 
-				write(1, "No such file or directory\n", 26);
-
+				build_error_message(argv, count);
+				/*write(1, "No such file or directory\n", 26);*/
 				free(buffer);
 				free_all_double_ptr(commands);
 				free_all_double_ptr(all_directories);
@@ -104,7 +105,7 @@ int main(int argc, char **argv, char **env)
 		buffer = NULL;
 
 		if (isatty(STDIN_FILENO))
-			write(1, dolla_dolla, 2);
+			write(STDIN_FILENO, dolla_dolla, 2);
 	}
 	if (characters == -1)
 		return (EXIT_FAILURE);

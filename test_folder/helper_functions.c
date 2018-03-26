@@ -1,4 +1,14 @@
 #include "holberton.h"
+void build_error_message(char **av, int count)
+{
+	(void)count;
+	write(1, av[0], _strlen(av[0]));
+	write(1, ": :", 3);
+	write(1, av[2], _strlen(av[1]));
+	write(1, ": not found\n", 12);
+}
+
+
 /**
  * _strcmp - compares two strings for equality
  * @s1: string 1
@@ -57,6 +67,19 @@ unsigned int _strlen(char *s)
  * Return: the dest memory address
  */
 char *_strncpy(char *dest, char *src, int n)
+{
+	int i;
+
+	for (i = 0; i < n && src[i] != '\0'; i++)
+		dest[i] = src[i];
+
+	for ( ; i < n; i++)
+		dest[i] = '\0';
+
+	return (dest);
+}
+
+char *_strncpyconst(char *dest, const char *src, int n)
 {
 	int i;
 

@@ -39,7 +39,8 @@ char **array_from_strtok(char *str)
 {
 	char **token_holder;
 	char *token;
-	unsigned int length, i;
+	unsigned int length;
+	int i;
 
 	str[_strlen(str) - 1] = '\0';
 	length = find_command_length(str);
@@ -47,11 +48,18 @@ char **array_from_strtok(char *str)
 		return (NULL);
 
 	token_holder = malloc((sizeof(char *)) * (length + 1));
+	if (token_holder == NULL)
+		return (NULL);
 	i = 0;
 	token = strtok(str, " ");
 	while (token != NULL)
 	{
 		token_holder[i] = malloc(_strlen(token) + 1);
+		if (token_holder[i] == NULL)
+		{
+			free_all_double_ptr(token_holder);
+			return (NULL);
+		}
 		_strncpy(token_holder[i], token, _strlen(token) + 1);
 		token = strtok(NULL, " ");
 		++i;
