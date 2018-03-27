@@ -1,7 +1,13 @@
 #include "holberton.h"
+/**
+ * INThandler - handles signals and write the prompt
+ * @sig: signal to handle
+ *
+ * Return: void
+ */
 void INThandler(int sig)
 {
-	signal(sig, SIG_IGN);
+	(void)sig;
 	write(STDOUT_FILENO, "\n$ ", 3);
 }
 
@@ -37,7 +43,6 @@ int main(int argc, char **argv, char **env)
 	/* while loop contining forever */ 
 	while ((characters = getline(&buffer, &length, stdin)))
 	{
-		signal(SIGINT, INThandler);
 		/* checks for end of file */
 		if (characters == EOF)
 		{
