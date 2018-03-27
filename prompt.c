@@ -1,4 +1,10 @@
 #include "holberton.h"
+void INThandler(int sig)
+{
+	signal(sig, SIG_IGN);
+	write(STDOUT_FILENO, "\n$ ", 3);
+}
+
 /**
  * main - basic shell recreation
  * @argc: argument count
@@ -21,23 +27,30 @@ int main(int argc, char **argv, char **env)
 
 	buffer = NULL, length = 0, count = 0;
 
+	/* write prompt only if it's from standard input */
 	if (isatty(STDIN_FILENO))
 		write(STDOUT_FILENO, dolla_dolla, 2);
 
-	signal(SIGINT, SIG_IGN);
+	/*signal kill for ctrl + c */
+	signal(SIGINT, INThandler);
+
+	/* while loop contining forever */ 
 	while ((characters = getline(&buffer, &length, stdin)))
 	{
-		/*
-		 * counting the number of times the prompt
-		 * shows up to display correct error
-		 */
+		signal(SIGINT, INThandler);
+		/* checks for end of file */
 		if (characters == EOF)
 		{
 			write(1, "\n", 1);
 			free(buffer);
 			exit(0);
 		}
+		/*
+		 * counting the number of times the prompt
+		 * shows up to display correct error
+		 */
 		++count;
+		/* collects commands from prompt and store in a double pointer array */
 		commands = array_from_strtok(buffer);
 		pid = fork();
 		if (pid == -1)
@@ -47,7 +60,6 @@ int main(int argc, char **argv, char **env)
 		}
 		if (pid == 0)
 		{
-			
 			/* check if commands is NULL or all empty spaces */
 			if (commands == NULL)
 			{
@@ -96,7 +108,6 @@ int main(int argc, char **argv, char **env)
 		else
 		{
 			wait(&status);
-
 			if (commands == NULL)
 			{
 				free(buffer);
@@ -117,6 +128,7 @@ int main(int argc, char **argv, char **env)
 		length = 0;
 		buffer = NULL;
 
+		/* write outs prompt only if from standard input */
 		if (isatty(STDIN_FILENO))
 			write(STDOUT_FILENO, dolla_dolla, 2);
 	}

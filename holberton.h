@@ -9,6 +9,9 @@
 #include <sys/stat.h>
 #include <signal.h>
 
+/* prompt.c */
+void INThandler(int sig);
+
 /* strtok_example.c */
 unsigned int find_command_length(char *s);
 char **array_from_strtok(char *str);
@@ -32,5 +35,5 @@ void free_all_double_ptr(char **d_ptr);
 
 /*error_message.c*/
 void build_error_message(char **av, char *fir_com, int count);
-int _putchar(char c);
+int _puterror(char c);
 #endif /* _HOLBERTON_H_ */

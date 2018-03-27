@@ -5,9 +5,9 @@
  *
  * Return: int to print
  */
-int _putchar(char c)
+int _puterror(char c)
 {
-	return (write(STDOUT_FILENO, &c, 1));
+	return (write(STDERR_FILENO, &c, 1));
 }
 /**
  * build_error_message - writes an error message similar to the sh error
@@ -22,8 +22,8 @@ void build_error_message(char **av, char *fir_com, int count)
 {
 	int mul, numlength, copy;
 
-	write(STDOUT_FILENO, av[0], _strlen(av[0]));
-	write(1, ": ", 2);
+	write(STDERR_FILENO, av[0], _strlen(av[0]));
+	write(STDERR_FILENO, ": ", 2);
 
 	copy = count;
 	mul = 1;
@@ -37,17 +37,17 @@ void build_error_message(char **av, char *fir_com, int count)
 	while (numlength > 1)
 	{
 		if ((count / mul) < 10)
-			_putchar((count / mul + '0'));
+			_puterror((count / mul + '0'));
 		else
-			_putchar((count / mul) % 10 + '0');
+			_puterror((count / mul) % 10 + '0');
 		--numlength;
 		mul /= 10;
 	}
-	_putchar(count % 10 + '0');
-	write(STDOUT_FILENO, ": ", 2);
-	write(STDOUT_FILENO, fir_com, _strlen(fir_com));
+	_puterror(count % 10 + '0');
+	write(STDERR_FILENO, ": ", 2);
+	write(STDERR_FILENO, fir_com, _strlen(fir_com));
 	if (isatty(STDIN_FILENO))
-		write(STDOUT_FILENO, ": not found\n", 12);
+		write(STDERR_FILENO, ": not found\n", 12);
 	else
-		write(STDOUT_FILENO, ": not found\n", 11);
+		write(STDERR_FILENO, ": not found\n", 11);
 }
