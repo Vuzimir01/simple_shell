@@ -24,12 +24,19 @@ int main(int argc, char **argv, char **env)
 	if (isatty(STDIN_FILENO))
 		write(STDOUT_FILENO, dolla_dolla, 2);
 
-	while ((characters = getline(&buffer, &length, stdin)) != EOF)
+	signal(SIGINT, SIG_IGN);
+	while ((characters = getline(&buffer, &length, stdin)))
 	{
 		/*
 		 * counting the number of times the prompt
 		 * shows up to display correct error
 		 */
+		if (characters == EOF)
+		{
+			write(1, "\n", 1);
+			free(buffer);
+			exit(0);
+		}
 		++count;
 		commands = array_from_strtok(buffer);
 		pid = fork();
@@ -40,6 +47,7 @@ int main(int argc, char **argv, char **env)
 		}
 		if (pid == 0)
 		{
+			
 			/* check if commands is NULL or all empty spaces */
 			if (commands == NULL)
 			{
