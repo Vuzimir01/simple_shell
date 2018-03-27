@@ -46,6 +46,8 @@ void build_error_message(char **av, char *fir_com, int count)
 	_putchar(count % 10 + '0');
 	write(STDOUT_FILENO, ": ", 2);
 	write(STDOUT_FILENO, fir_com, _strlen(fir_com));
-	write(STDOUT_FILENO, ": not found\n", 12);
+	if (isatty(STDIN_FILENO))
+		write(STDOUT_FILENO, ": not found\n", 12);
+	else
+		write(STDOUT_FILENO, ": not found\n", 11);
 }
-
