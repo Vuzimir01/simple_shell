@@ -46,10 +46,7 @@ void build_error_message(char **av, char *fir_com, int count)
 	_puterror(count % 10 + '0');
 	write(STDERR_FILENO, ": ", 2);
 	write(STDERR_FILENO, fir_com, _strlen(fir_com));
-	if (isatty(STDIN_FILENO))
-		write(STDERR_FILENO, ": not found\n", 12);
-	else
-		write(STDERR_FILENO, ": not found", 11);
+	write(STDERR_FILENO, ": not found\n", 12);
 }
 /**
  * end_of_file - function to handle ctrl+c interrupt signal
