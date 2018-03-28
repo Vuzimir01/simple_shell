@@ -15,6 +15,7 @@ Simple Shell files:
 
 | **File** | **Description** |
 |----------|-----------------|
+| holberton.h | Header file that contains all the functions and standard C library header file |
 | prompt.c | Contains the int main(void) function, entry point and **INThandler** |
 | strtok_example.c | Contains function that store commands in double pointer: **find_command_length**, **array_from_strtok functions** |
 | helper_function.c | Contains all helper functions: **_strncpy**,**_strncpyconst**, **_strlen_const**, **_strcmp**,**_strlen** |
