@@ -1,5 +1,5 @@
 .TH HSH 1 "16 March 2018" "0.32" "Holberton Commands Manual"
-.SH NAME STILL NEED TO MENTION PATH, SIGNALS, POSIX, 
+.SH NAME
 .B hsh 
 - Holberton School Simple Shell
 .SH SYNOPSIS
@@ -90,16 +90,24 @@ are handled automatically by
 ,
 .I _printf(3)
 .SH FILES
-.I /simple_shell/prompt.c 
+.I prompt.c 
 - Contains the int main(void) function, entry point.
 
-.I /simple_shell/strtok_example.c 
+.I error_message.c
+- Contains functions that creates messages appropriate to specific errors:
+.B _puterror, build_error_message, end_of_file, fork_fail
+
+.I strtok_example.c 
 - Contains function that stores commands in double pointer: 
 .B find_command_length, array_form_strtok functions.
 
 .I helper_function.c 
 - Contains all helper functions:
-.B _strncpy,_strlen_const,_strcmp,_strlen
+.B _strncpy,_strlen_const,_strcmp,_strlen,_strncpyconst
+
+.I child_processes.c
+- Contains additional processes required by multiple files
+.B command_is_null,exit_out,env_out,parent_free_buff_commands,c_path
 
 .I environment.c 
 - Contains all functions that handle environment/path: 
@@ -107,7 +115,7 @@ are handled automatically by
 
 .I free_it_all.c 
 - Contains function that frees memory:
-.B free_it_all
+.B free_all_double_ptr
 
 .SH BUGS
 Report 
