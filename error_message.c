@@ -1,23 +1,8 @@
 #include "holberton.h"
-/**
- * _puterror - puts a char to the STD
- * @c: character to write out
- *
- * Return: int to print
- */
 int _puterror(char c)
 {
 	return (write(STDERR_FILENO, &c, 1));
 }
-/**
- * build_error_message - writes an error message similar to the sh error
- * when command not found
- * @av: the argv from the int main function
- * @fir_com: first command to print if not found
- * @count: the number of times you've done a command
- *
- * Return: void
- */
 void build_error_message(char **av, char *fir_com, int count)
 {
 	int mul, numlength, copy;
@@ -51,24 +36,12 @@ void build_error_message(char **av, char *fir_com, int count)
 	else
 		write(STDERR_FILENO, ": not found", 11);
 }
-/**
- * end_of_file - function to handle ctrl+c interrupt signal
- * writes a new line, then frees the buffer from getline
- * @buffer: buffer array created by new line
- *
- * Return: void
- */
 void end_of_file(char *buffer)
 {
 	write(STDOUT_FILENO, "\n", 1);
 	free(buffer);
 	exit(0);
 }
-/**
- * fork_fail - function that handles a fork fail
- *
- * Return: void
- */
 void fork_fail(void)
 {
 	perror("Error:");
