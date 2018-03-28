@@ -41,7 +41,7 @@ char **array_from_strtok(char *str)
 	char *token;
 	unsigned int length;
 	int i;
-	
+
 	/* replace '\n' added by getline with '\0'*/
 	str[_strlen(str) - 1] = '\0';
 	length = find_command_length(str);

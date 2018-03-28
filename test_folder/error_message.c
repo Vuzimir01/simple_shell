@@ -1,6 +1,6 @@
 #include "holberton.h"
 /**
- * _putchar - puts a char to the STD
+ * _puterror - puts a char to the STD
  * @c: character to write out
  *
  * Return: int to print
@@ -50,4 +50,27 @@ void build_error_message(char **av, char *fir_com, int count)
 		write(STDERR_FILENO, ": not found\n", 12);
 	else
 		write(STDERR_FILENO, ": not found", 11);
+}
+/**
+ * end_of_file - function to handle ctrl+c interrupt signal
+ * writes a new line, then frees the buffer from getline
+ * @buffer: buffer array created by new line
+ *
+ * Return: void
+ */
+void end_of_file(char *buffer)
+{
+	write(STDOUT_FILENO, "\n", 1);
+	free(buffer);
+	exit(0);
+}
+/**
+ * fork_fail - function that handles a fork fail
+ *
+ * Return: void
+ */
+void fork_fail(void)
+{
+	perror("Error:");
+	exit(EXIT_FAILURE);
 }

@@ -21,35 +21,25 @@ void INThandler(int sig)
  */
 int main(int argc, char **argv, char **env)
 {
-	char *buffer;
-	char **commands, **all_directories;
-	size_t length;
-	ssize_t characters;
+	char *buffer; char **commands;
+	size_t length; ssize_t characters;
 	char *dolla_dolla = "$ ", *exit_command = "exit", *env_command = "env";
-	pid_t pid;
-	struct stat fileStat, fileStat2;
-	int i, status, count;
+	pid_t pid; struct stat fileStat;
+	int status, count;
 	(void)argc;
 
 	buffer = NULL, length = 0, count = 0;
-
 	/* write prompt only if it's from standard input */
 	if (isatty(STDIN_FILENO))
 		write(STDOUT_FILENO, dolla_dolla, 2);
-
 	/*signal kill for ctrl + c */
 	signal(SIGINT, INThandler);
-
-	/* while loop contining forever */ 
+	/* while loop contining forever */
 	while ((characters = getline(&buffer, &length, stdin)))
 	{
 		/* checks for end of file */
 		if (characters == EOF)
-		{
-			write(STDOUT_FILENO, "\n", 1);
-			free(buffer);
-			exit(0);
-		}
+			end_of_file(buffer);
 		/*
 		 * counting the number of times the prompt
 		 * shows up to display correct error
@@ -57,89 +47,49 @@ int main(int argc, char **argv, char **env)
 		++count;
 		/* collects commands from prompt and store in a double pointer array */
 		commands = array_from_strtok(buffer);
+		/*create a new process */
 		pid = fork();
 		if (pid == -1)
-		{
-			perror("Error:");
-			exit(EXIT_FAILURE);
-		}
+			fork_fail();
 		if (pid == 0)
 		{
 			/* check if commands is NULL or all empty spaces */
 			if (commands == NULL)
-			{
-				free(buffer);
-				exit(EXIT_SUCCESS);
-			}
+				command_is_null(buffer);
 			/* check if the command is an EXIT to exit the shell */
 			else if (_strcmp(exit_command, commands[0]))
-			{
-				free_all_double_ptr(commands);
-				free(buffer);
-				exit(0);
-			}
+				exit_out(buffer, commands);
 			/* check if the command is ENV to print out environment variables */
 			else if (_strcmp(env_command, commands[0]))
-			{
-				free(buffer);
-				free_all_double_ptr(commands);
-				print_env(env);
-				exit(0);
-			}
+				env_out(buffer, commands, env);
 			/* check if the command is a full path to an executable file */
 			else if (stat(commands[0], &fileStat) == 0)
 				execve(commands[0], commands, NULL);
 			/* check all $PATH directories for executable commands */
 			else
-			{
-				i = 0;
-				all_directories = store_env_variables(commands[0], env);
-				while (all_directories[i])
-				{
-					if (stat(all_directories[i], &fileStat2) == 0)
-						execve(all_directories[i], commands, NULL);
-					++i;
-				}
-
-				/* if no command found, print error message */
-				build_error_message(argv, commands[0], count);
-				
-				free(buffer);
-				free_all_double_ptr(commands);
-				free_all_double_ptr(all_directories);
-				exit(0);
-			}
+				c_path(commands, buffer, env, argv, count);
 		}
 		/* DON'T FORGET TO FREE YOUR MALLOCS FROM THE TOKEN YOU BUILT */
 		else
 		{
+			/* wait for the child process to finish first */
 			wait(&status);
 			if (commands == NULL)
-			{
-				free(buffer);
-				free_all_double_ptr(commands);
-			}
+				parent_free_buff_commands(buffer, commands);
+			/* if exit, free buffer and commands, then exit program */
 			else if (_strcmp(exit_command, commands[0]))
-			{
-				free(buffer);
-				free_all_double_ptr(commands);
-				exit(0);
-			}
-			else if (commands != NULL)
-			{
-				free_all_double_ptr(commands);
-				free(buffer);
-			}
+				exit_out(buffer, commands);
+			/*free buffer and commands double ptr from parent process */
+			else
+				parent_free_buff_commands(buffer, commands);
 		}
-		length = 0;
-		buffer = NULL;
-
+		/* reset length and buffer for getline funciton */
+		length = 0; buffer = NULL;
 		/* write outs prompt only if from standard input */
 		if (isatty(STDIN_FILENO))
 			write(STDOUT_FILENO, dolla_dolla, 2);
 	}
 	if (characters == -1)
 		return (EXIT_FAILURE);
-
 	return (EXIT_SUCCESS);
 }
