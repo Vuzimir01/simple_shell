@@ -1,4 +1,10 @@
 #include "holberton.h"
+/**
+ * free_all_double_ptr - frees all the memory associated with a double pointer
+ * @d_ptr: the double pointer to free
+ *
+ * Return: void
+ */
 void free_all_double_ptr(char **d_ptr)
 {
 	unsigned int i = 0;
