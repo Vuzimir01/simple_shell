@@ -38,42 +38,16 @@ or
 .I non-interactive 
 mode.  The user may quit the program by typing "quit", "Ctrl + D", or "Ctrl + C" on the command line.
 When the program quits or a command has been executed, 
-.Bsimple shell
- returns with a new prompt: $
+.Bsimple shell 
+returns with a new prompt: "$ "
 
-.B
-.SH DEFINITIONS
 .SH RESERVED WORDS
-exit env
-.SH SHELL GRAMMAR
-.SH COMMENTS
-.SH PARAMETERS
--parameter definition
--positional parameters
--special parameters
--shell variables
---The  following  variables  are  used  by  the  shell.  In some cases, bash
-       assigns a default value to a variable; these cases are noted below.
--PATH
+.B exit: 
+quits the program, exits the shell.
 
--arrays
+.B env: 
+prints the environment variables
 
-.SH EXPANSION
-.SH REDIRECTION
-.SH ALIASES
-.SH FUNCTIONS
-getline
-strtok
-
-.SH COMMAND EXECUTION
-.SH COMMAND EXECUTION ENVIRONMENT
-?
-.SH ENVIRONMENT
-.SH EXIT STATUS
-.SH SIGNALS
-.SH JOB CONTROL
-.SH PROMPTING
-.SH READLINE
 .SH HISTORY
 The 
 .B history 
@@ -89,9 +63,6 @@ and
 .B env
 are handled automatically by 
 .B simple shell
-.SH EXIT STATUS
-.SH
-.SH PROMPTING
 
 .SH SEE ALSO
 .I sh(1)
@@ -119,7 +90,6 @@ are handled automatically by
 - Contains function that frees memory:
 .B free_it_all
 
-.SH HISTORY
 .SH BUGS
 Report 
 .B simple shell
