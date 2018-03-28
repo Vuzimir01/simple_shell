@@ -15,11 +15,13 @@ Simple Shell files:
 
 | **File** | **Description** |
 |----------|-----------------|
-| prompt.c | Contains the int main(void) function, entry point |
+| prompt.c | Contains the int main(void) function, entry point and **INThandler** |
 | strtok_example.c | Contains function that store commands in double pointer: **find_command_length**, **array_from_strtok functions** |
-| helper_function.c | Contains all helper functions: **_strncpy**,**_strlen_const**, **_strcmp**,**_strlen** |
+| helper_function.c | Contains all helper functions: **_strncpy**,**_strncpyconst**, **_strlen_const**, **_strcmp**,**_strlen** |
 | environment.c | Contains all functions that handle environment/path: **find_semis**, **store_env_variables**, **_getenv**, **_strncpycmd**, **print_env** |
 | free_it_all.c | Contains function that frees memory: **free_it_all** |
+| error_messages.c | Contains functions that handle error messages: **build_error_message**, **_puterror**, **end_of_file**, **fork_fail**|
+| child_processes.c | Contains functions that handle all child proccess functionality: **command_is_null**, **exit_out**, **env_out**, **parent_free_buff_commands**, **c_path**|
 
 ## How to Install
 Clone the repo below
