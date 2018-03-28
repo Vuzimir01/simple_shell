@@ -1,24 +1,27 @@
-.TH man 1 "16 March 2018" "0.32" "Simple UNIX Shell Manual"
-.SH NAME
-shell - simple shell
+.TH HSH 1 "16 March 2018" "0.32" "Simple UNIX Shell Manual"
+.SH NAME STILL NEED TO MENTION PATH, SIGNALS, POSIX, 
+.B hsh 
+- simple shell
 .SH SYNOPSIS
-.B ./hsh
-
+.B ./hsh 
 [command] [options]
+.SH DESCRIPTION
+.B hsh 
+(Simple Shell) is an end of semester project for students at Holberton School where we expore, understand and build a working functional simple shell program.
 
-.B .hsh
-[command] [options]
+.B Overview
+
+The simple shell is a simplified iteration of a command line interpreter, similar to 
+.B bash or 
+.B dash. 
 .SH COPYRIGHT
-.B Simple Shell
+.B hsh 
  is Copyright (C) Nickolas Teixeira and Amy Galles and licensed under the MIT license.
 .I FORMAT [ARGUMENT]...
-.SH DESCRIPTION
-.B Simple Shell 
-is an end of semester project for students at Holberton School where we expore, understand and build a working functional simple shell program.
 .SH OPTIONS
 .B Simple Shell
 operates in both 
-.Iinteractive 
+.I interactive 
 and 
 .I non-interactive
  mode. The user may initiate 
@@ -28,52 +31,26 @@ and begin working or initate
 using commands meant to be run by the program.
 .SH ARGUMENTS
 The first argument, argument 0 is understood to be the command to be run by 
-.Bsimple shell
+.B simple shell
 and arguments following as modifiers or options.
 .SH INVOCATION
-.Bsimple shell
+.B simple shell
 may be invoked with the same functionality in 
 .I interactive 
 or 
 .I non-interactive 
-mode.  The user may quit the program by typing "quit", "Ctrl + D", or "Ctrl + C" on the command line.
+mode.  The user may quit the program by typing "exit", "Ctrl + D", or "Ctrl + C" on the command line.
 When the program quits or a command has been executed, 
-.Bsimple shell
- returns with a new prompt: $
+.B simple shell 
+returns with a new prompt: "$ "
 
-.B
-.SH DEFINITIONS
 .SH RESERVED WORDS
-exit env
-.SH SHELL GRAMMAR
-.SH COMMENTS
-.SH PARAMETERS
--parameter definition
--positional parameters
--special parameters
--shell variables
---The  following  variables  are  used  by  the  shell.  In some cases, bash
-       assigns a default value to a variable; these cases are noted below.
--PATH
+.B exit: 
+quits the program, exits the shell.
 
--arrays
+.B env: 
+prints the environment variables
 
-.SH EXPANSION
-.SH REDIRECTION
-.SH ALIASES
-.SH FUNCTIONS
-getline
-strtok
-
-.SH COMMAND EXECUTION
-.SH COMMAND EXECUTION ENVIRONMENT
-?
-.SH ENVIRONMENT
-.SH EXIT STATUS
-.SH SIGNALS
-.SH JOB CONTROL
-.SH PROMPTING
-.SH READLINE
 .SH HISTORY
 The 
 .B history 
@@ -89,9 +66,6 @@ and
 .B env
 are handled automatically by 
 .B simple shell
-.SH EXIT STATUS
-.SH
-.SH PROMPTING
 
 .SH SEE ALSO
 .I sh(1)
@@ -119,7 +93,6 @@ are handled automatically by
 - Contains function that frees memory:
 .B free_it_all
 
-.SH HISTORY
 .SH BUGS
 Report 
 .B simple shell
