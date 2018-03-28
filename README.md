@@ -81,4 +81,4 @@ For more information, please see http://www.bis.doc.gov
 
 Licensing
 =========
-Simple Shell is licensed under the MIT License. 
+Simple Shell is licensed under the MIT License.
