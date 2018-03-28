@@ -1,99 +1,76 @@
 #include "holberton.h"
 /**
- * command_is_null - frees the buffer we create when the double ptr command
- * returned null
- * @buffer: the buffer we created from getline
+ * _puterror - puts a char to the STD
+ * @c: character to write out
  *
- * Return: void
+ * Return: int to print
  */
-void command_is_null(char *buffer)
+int _puterror(char c)
 {
-	free(buffer);
-	exit(EXIT_SUCCESS);
+	return (write(STDERR_FILENO, &c, 1));
 }
 /**
- * exit_out - frees the buffer and commands we created from the
- * getline function, then exits child process
- * @buffer: buffer we created from getline
- * @commands: double pointer array we created to store all commands
- * from the prompt
+ * build_error_message - writes an error message similar to the sh error
+ * when command not found
+ * @av: the argv from the int main function
+ * @fir_com: first command to print if not found
+ * @count: the number of times you've done a command
  *
  * Return: void
  */
-void exit_out(char *buffer, char **commands)
+void build_error_message(char **av, char *fir_com, int count)
 {
-	free(buffer);
-	free_all_double_ptr(commands);
-	exit(EXIT_SUCCESS);
-}
+	int mul, numlength, copy;
 
-/**
- * env_out - frees the buffer and commands we created from the
- * getline function, prints the env, then exits child process
- * @buffer: buffer we created from getline
- * @commands: double pointer array we created to store all commands
- * from the prompt
- * @env: environment variables from your login
- *
- * Return: void
- */
-void env_out(char *buffer, char **commands, char **env)
-{
-	free(buffer);
-	free_all_double_ptr(commands);
-	print_env(env);
-	exit(EXIT_SUCCESS);
-}
-/**
- * parent_free_buff_commands - frees buffer and commands you created
- * with the getline function from the prompt
- * @buffer: buffer we created from getline
- * @commands: double pointer array we created to store all commands
- * from the prompt
- *
- * Return: void
- */
-void parent_free_buff_commands(char *buffer, char **commands)
-{
-	free(buffer);
-	free_all_double_ptr(commands);
-}
+	write(STDERR_FILENO, av[0], _strlen(av[0]));
+	write(STDERR_FILENO, ": ", 2);
 
-/**
- * c_path - creates a double ptr array of all your directories
- * from your $PATH variable, checks if the first command you
- * entered is a executable in all your directories, then executes.
- * If not found, prints out an error message, then frees buffer and
- * commands you created with the getline function from the prompt
- * @buffer: buffer we created from getline
- * @commands: double pointer array we created to store all commands
- * from the prompt
- * @env: environment variables from your login
- * @argv: argument vector from int main
- * @count: number of times you've entered commands to the prompt
- *
- * Return: void
- */
-void c_path(char **commands, char *buffer, char **env, char **argv, int count)
-{
-	struct stat fileStat2;
-	int i;
-	char **all_directories;
-
-	i = 0;
-	all_directories = store_env_variables(commands[0], env);
-	while (all_directories[i])
+	copy = count;
+	mul = 1;
+	numlength = 1;
+	while (copy >= 10)
 	{
-		if (stat(all_directories[i], &fileStat2) == 0)
-			execve(all_directories[i], commands, NULL);
-		++i;
+		copy /= 10;
+		mul *= 10;
+		++numlength;
 	}
-
-	/* if no command found, print error message */
-	build_error_message(argv, commands[0], count);
-
+	while (numlength > 1)
+	{
+		if ((count / mul) < 10)
+			_puterror((count / mul + '0'));
+		else
+			_puterror((count / mul) % 10 + '0');
+		--numlength;
+		mul /= 10;
+	}
+	_puterror(count % 10 + '0');
+	write(STDERR_FILENO, ": ", 2);
+	write(STDERR_FILENO, fir_com, _strlen(fir_com));
+	if (isatty(STDIN_FILENO))
+		write(STDERR_FILENO, ": not found\n", 12);
+	else
+		write(STDERR_FILENO, ": not found", 11);
+}
+/**
+ * end_of_file - function to handle ctrl+c interrupt signal
+ * writes a new line, then frees the buffer from getline
+ * @buffer: buffer array created by new line
+ *
+ * Return: void
+ */
+void end_of_file(char *buffer)
+{
+	write(STDOUT_FILENO, "\n", 1);
 	free(buffer);
-	free_all_double_ptr(commands);
-	free_all_double_ptr(all_directories);
-	exit(EXIT_SUCCESS);
+	exit(0);
+}
+/**
+ * fork_fail - function that handles a fork fail
+ *
+ * Return: void
+ */
+void fork_fail(void)
+{
+	perror("Error:");
+	exit(EXIT_FAILURE);
 }
