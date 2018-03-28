@@ -1,24 +1,27 @@
-.TH man 1 "16 March 2018" "0.32" "Simple UNIX Shell Manual"
-.SH NAME
-shell - simple shell
+.TH HSH 1 "16 March 2018" "0.32" "Simple UNIX Shell Manual"
+.SH NAME STILL NEED TO MENTION PATH, SIGNALS, POSIX, 
+.B hsh 
+- simple shell
 .SH SYNOPSIS
-.B ./hsh
-
+.B ./hsh 
 [command] [options]
+.SH DESCRIPTION
+.B hsh 
+(Simple Shell) is an end of semester project for students at Holberton School where we expore, understand and build a working functional simple shell program.
 
-.B .hsh
-[command] [options]
+.B Overview
+
+The simple shell is a simplified iteration of a command line interpreter, similar to 
+.B bash or 
+.B dash. 
 .SH COPYRIGHT
-.B Simple Shell
+.B hsh 
  is Copyright (C) Nickolas Teixeira and Amy Galles and licensed under the MIT license.
 .I FORMAT [ARGUMENT]...
-.SH DESCRIPTION
-.B Simple Shell 
-is an end of semester project for students at Holberton School where we expore, understand and build a working functional simple shell program.
 .SH OPTIONS
 .B Simple Shell
 operates in both 
-.Iinteractive 
+.I interactive 
 and 
 .I non-interactive
  mode. The user may initiate 
@@ -28,17 +31,17 @@ and begin working or initate
 using commands meant to be run by the program.
 .SH ARGUMENTS
 The first argument, argument 0 is understood to be the command to be run by 
-.Bsimple shell
+.B simple shell
 and arguments following as modifiers or options.
 .SH INVOCATION
-.Bsimple shell
+.B simple shell
 may be invoked with the same functionality in 
 .I interactive 
 or 
 .I non-interactive 
-mode.  The user may quit the program by typing "quit", "Ctrl + D", or "Ctrl + C" on the command line.
+mode.  The user may quit the program by typing "exit", "Ctrl + D", or "Ctrl + C" on the command line.
 When the program quits or a command has been executed, 
-.Bsimple shell 
+.B simple shell 
 returns with a new prompt: "$ "
 
 .SH RESERVED WORDS
