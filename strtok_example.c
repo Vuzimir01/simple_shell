@@ -1,4 +1,10 @@
 #include "holberton.h"
+/**
+ * find_command_length - finds the number of commands in the string
+ * @s: the string to find the commands
+ *
+ * Return: number of commands, unsigned int
+ */
 unsigned int find_command_length(char *s)
 {
 	unsigned int commands, i, flag;
@@ -20,6 +26,15 @@ unsigned int find_command_length(char *s)
 	}
 	return (commands);
 }
+/**
+ * array_from_strtok - creates a double pointer array that holders pointers
+ * to each string from the command line
+ * @str: the commands from the terminal when you type them to the standard
+ * input
+ *
+ * Return: double pointer array of pointers that are commands to interpret
+ * and execute
+ */
 char **array_from_strtok(char *str)
 {
 	char **token_holder;
@@ -27,11 +42,13 @@ char **array_from_strtok(char *str)
 	unsigned int length;
 	int i;
 
+	/* replace '\n' added by getline with '\0'*/
 	str[_strlen(str) - 1] = '\0';
 	length = find_command_length(str);
 	if (length == 0)
 		return (NULL);
 
+	/* +1 accounts for NULL token that will be added */
 	token_holder = malloc((sizeof(char *)) * (length + 1));
 	if (token_holder == NULL)
 		return (NULL);
