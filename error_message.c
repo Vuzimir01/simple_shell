@@ -60,7 +60,8 @@ void build_error_message(char **av, char *fir_com, int count)
  */
 void end_of_file(char *buffer)
 {
-	write(STDOUT_FILENO, "\n", 1);
+	if (isatty(STDIN_FILENO))
+		write(STDOUT_FILENO, "\n", 1);
 	free(buffer);
 	exit(0);
 }
