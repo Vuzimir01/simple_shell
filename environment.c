@@ -7,14 +7,19 @@
  */
 unsigned int find_semis(char *path)
 {
-	unsigned int semis, i;
+	unsigned int semis, i, flag;
 
-	i = 0;
-	semis = 1;
+	i = 0, semis = 0, flag = 0;
 	while (path[i])
 	{
-		if (path[i] == ':')
+		if (path[i] != ':')
+			flag = 1;
+
+		if ((flag && path[i + 1] == ':') || (flag && path[i + 1] == '\0'))
+		{
 			++semis;
+			flag = 0;
+		}
 		++i;
 	}
 	return (semis);
@@ -143,11 +148,11 @@ void print_env(char **environ)
 	i = 0;
 	while (environ[i])
 	{
-		/* find the lenght of each env variables */
+		/* find the length of each env variable */
 		length = _strlen(environ[i]);
 		/* write it out the the stdout */
-		write(STDIN_FILENO, environ[i], length);
-		write(STDIN_FILENO, "\n", 1);
+		write(STDOUT_FILENO, environ[i], length);
+		write(STDOUT_FILENO, "\n", 1);
 		++i;
 	}
 }
