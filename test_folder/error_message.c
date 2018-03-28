@@ -49,5 +49,5 @@ void build_error_message(char **av, char *fir_com, int count)
 	if (isatty(STDIN_FILENO))
 		write(STDERR_FILENO, ": not found\n", 12);
 	else
-		write(STDERR_FILENO, ": not found\n", 11);
+		write(STDERR_FILENO, ": not found", 11);
 }

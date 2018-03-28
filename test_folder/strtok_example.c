@@ -41,12 +41,14 @@ char **array_from_strtok(char *str)
 	char *token;
 	unsigned int length;
 	int i;
-
+	
+	/* replace '\n' added by getline with '\0'*/
 	str[_strlen(str) - 1] = '\0';
 	length = find_command_length(str);
 	if (length == 0)
 		return (NULL);
 
+	/* +1 accounts for NULL token that will be added */
 	token_holder = malloc((sizeof(char *)) * (length + 1));
 	if (token_holder == NULL)
 		return (NULL);

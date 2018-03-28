@@ -46,7 +46,7 @@ int main(int argc, char **argv, char **env)
 		/* checks for end of file */
 		if (characters == EOF)
 		{
-			write(1, "\n", 1);
+			write(STDOUT_FILENO, "\n", 1);
 			free(buffer);
 			exit(0);
 		}
@@ -61,7 +61,7 @@ int main(int argc, char **argv, char **env)
 		if (pid == -1)
 		{
 			perror("Error:");
-			exit(1);
+			exit(EXIT_FAILURE);
 		}
 		if (pid == 0)
 		{
@@ -69,9 +69,9 @@ int main(int argc, char **argv, char **env)
 			if (commands == NULL)
 			{
 				free(buffer);
-				exit(0);
+				exit(EXIT_SUCCESS);
 			}
-			/* check if the command is a EXIT to exit the shell */
+			/* check if the command is an EXIT to exit the shell */
 			else if (_strcmp(exit_command, commands[0]))
 			{
 				free_all_double_ptr(commands);
@@ -86,10 +86,10 @@ int main(int argc, char **argv, char **env)
 				print_env(env);
 				exit(0);
 			}
-			/* check if the command is a $PATH that has an executable */
+			/* check if the command is a full path to an executable file */
 			else if (stat(commands[0], &fileStat) == 0)
 				execve(commands[0], commands, NULL);
-			/* check all $PATH VARIABLES for executable commands */
+			/* check all $PATH directories for executable commands */
 			else
 			{
 				i = 0;
@@ -101,8 +101,9 @@ int main(int argc, char **argv, char **env)
 					++i;
 				}
 
+				/* if no command found, print error message */
 				build_error_message(argv, commands[0], count);
-				/*write(1, "No such file or directory\n", 26);*/
+				
 				free(buffer);
 				free_all_double_ptr(commands);
 				free_all_double_ptr(all_directories);
@@ -140,6 +141,5 @@ int main(int argc, char **argv, char **env)
 	if (characters == -1)
 		return (EXIT_FAILURE);
 
-	free(buffer);
 	return (EXIT_SUCCESS);
 }
