@@ -1,7 +1,7 @@
 SIMPLE SHELL
 ============
 
-Simple Shell is a end of semester project for students at [Holberton](https://www.holbertonschool.com/) where we explore, understand and build a working functional simple shell program.
+Simple Shell is an end of semester project for students at [Holberton](https://www.holbertonschool.com/) where we explore, understand and build a working functional simple shell program.
 
 ## Audience
 
