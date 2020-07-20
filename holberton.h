@@ -9,7 +9,7 @@
 #include <sys/stat.h>
 #include <signal.h>
 
-/* prompt.c */
+/* prompt.ctest */
 void INThandler(int sig);
 
 /* strtok_example.c */
